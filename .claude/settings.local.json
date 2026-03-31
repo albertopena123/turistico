@@ -76,7 +76,8 @@
       "Bash(grep -r \"db.role\\\\|db.permission\" 'D:\\\\sistemas unamad\\\\dashboard' --include=*.ts --include=*.tsx)",
       "Bash(find 'D:\\\\sistemas unamad\\\\dashboard' -name seed* -o -name *seed*)",
       "Bash(npx tsc:*)",
-      "Bash(grep -r UserModule 'D:\\\\sistemas unamad\\\\dashboard\\\\features' --include=*.ts --include=*.tsx)"
+      "Bash(grep -r UserModule 'D:\\\\sistemas unamad\\\\dashboard\\\\features' --include=*.ts --include=*.tsx)",
+      "Bash(find /c/Apache24/htdocs/turistico -name tailwind* -o -name next.config*)"
     ]
   }
 }
