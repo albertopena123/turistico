@@ -10,7 +10,7 @@ export interface SessionPayload {
   userId: string
   roleId: string
   roleSlug: string
-  documentNumber: string
+  email: string
   firstName: string
   paternalSurname: string
   maternalSurname: string

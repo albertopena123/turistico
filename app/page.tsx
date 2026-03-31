@@ -1,454 +1,425 @@
-import Link from "next/link";
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
 import {
-  Building2,
-  GraduationCap,
-  Users,
-  BookOpen,
-  Globe,
-  MapPin,
   Phone,
-  Mail,
-  Clock,
-  Shield,
-  ArrowRight,
-  Sparkles,
-  ExternalLink,
-  BarChart,
-  Blocks,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { SmartHeader } from "@/components/smart-header";
-import { AnimateOnScroll } from "@/components/animate-on-scroll";
-import { LottieIllustration } from "@/components/animated-illustration";
+  Home,
+  Plane,
+  Package,
+  Tag,
+  Compass,
+  Map,
+  Car,
+  Castle,
+  ShieldCheck,
+  Bus,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  ArrowLeftRight,
+  CalendarDays,
+  Users,
+  CreditCard,
+  Gift,
+  Headphones,
+  MapPin,
+  HelpCircle,
+  Star,
+  Menu,
+  ShoppingCart,
+  User,
+} from "lucide-react"
 
-const systemStats = [
-  {
-    title: "Facultades",
-    value: "4",
-    icon: Building2,
-    description: "Facultades activas",
-    gradient: "from-blue-500/10 to-cyan-500/10",
-    iconColor: "text-blue-600 dark:text-blue-400",
-  },
-  {
-    title: "Carreras",
-    value: "12",
-    icon: GraduationCap,
-    description: "Programas académicos",
-    gradient: "from-violet-500/10 to-purple-500/10",
-    iconColor: "text-violet-600 dark:text-violet-400",
-  },
-  {
-    title: "Estudiantes",
-    value: "3,500+",
-    icon: Users,
-    description: "Estudiantes matriculados",
-    gradient: "from-amber-500/10 to-orange-500/10",
-    iconColor: "text-amber-600 dark:text-amber-400",
-  },
-  {
-    title: "Docentes",
-    value: "180+",
-    icon: BookOpen,
-    description: "Personal docente",
-    gradient: "from-emerald-500/10 to-green-500/10",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
-  },
-];
+const navTabs = [
+  { label: "Alojamientos", icon: Home, active: false },
+  { label: "Vuelos", icon: Plane, active: false },
+  { label: "Paquetes", icon: Package, active: true },
+  { label: "Ofertas", icon: Tag, active: false },
+  { label: "Actividades", icon: Compass, active: false },
+  { label: "Circuitos", icon: Map, active: false },
+  { label: "Autos", icon: Car, active: false },
+  { label: "Disney", icon: Castle, active: false },
+  { label: "Asistencias", icon: ShieldCheck, active: false },
+  { label: "Traslados", icon: Bus, active: false },
+]
 
-const quickLinks = [
-  { title: "Portal Web", href: "#", icon: Globe, desc: "Sitio oficial" },
-  { title: "Directorio", href: "#", icon: Phone, desc: "Contactos internos" },
+const destinations = [
   {
-    title: "Correo Institucional",
-    href: "#",
-    icon: Mail,
-    desc: "Acceso al email",
+    name: "Cancún",
+    slug: "cancun",
+    country: "México",
+    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&h=300&fit=crop",
+    price: "USD 450",
   },
-];
+  {
+    name: "Cartagena",
+    slug: "cartagena",
+    country: "Colombia",
+    image: "https://images.unsplash.com/photo-1533050487297-09b450131914?w=400&h=300&fit=crop",
+    price: "USD 380",
+  },
+  {
+    name: "Cusco",
+    slug: "cusco",
+    country: "Perú",
+    image: "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=400&h=300&fit=crop",
+    price: "USD 220",
+  },
+  {
+    name: "Río de Janeiro",
+    slug: "rio-de-janeiro",
+    country: "Brasil",
+    image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=400&h=300&fit=crop",
+    price: "USD 520",
+  },
+]
 
-export default function Home() {
+export default function HomePage() {
+  const [activeTab, setActiveTab] = useState("Paquetes")
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <SmartHeader />
-
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b pt-16">
-        {/* Animated background blobs — pure CSS, zero JS */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden [contain:strict]">
-          <div className="blob-animate-1 absolute -top-1/3 left-1/2 h-[400px] w-[400px] -translate-x-1/2 rounded-full bg-primary/5 blur-2xl" />
-          <div className="blob-animate-2 absolute -bottom-1/4 right-0 h-[300px] w-[300px] rounded-full bg-violet-500/5 blur-2xl" />
-        </div>
-
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28 lg:px-8 lg:py-32">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Text content */}
-            <div>
-              <AnimateOnScroll>
-                <Badge
-                  variant="secondary"
-                  className="mb-6 rounded-full px-4 py-1.5 text-sm font-medium"
-                >
-                  <Sparkles className="mr-1.5 h-3.5 w-3.5" />
-                  Sistema de Gestión Integral
-                </Badge>
-              </AnimateOnScroll>
-
-              <AnimateOnScroll delay={100}>
-                <h2 className="bg-gradient-to-br from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl lg:text-6xl">
-                  Panel de Información
-                </h2>
-              </AnimateOnScroll>
-
-              <AnimateOnScroll delay={200}>
-                <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted-foreground sm:text-xl">
-                  Plataforma centralizada de gestión administrativa y académica
-                  de la Universidad Nacional Amazónica de Madre de Dios.
-                </p>
-              </AnimateOnScroll>
-
-              <AnimateOnScroll delay={300}>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                  <Link href="/login">
-                    <Button
-                      size="lg"
-                      className="group rounded-xl px-8 font-semibold shadow-lg transition-[transform,box-shadow] duration-200 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      Acceder al Sistema
-                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                    </Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="rounded-xl px-8 font-semibold transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                  >
-                    Conocer más
-                  </Button>
-                </div>
-              </AnimateOnScroll>
+    <div className="flex min-h-screen flex-col bg-gray-50">
+      {/* ============ TOP BAR ============ */}
+      <header className="bg-[#4300D2] text-white">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/20">
+              <Plane className="h-4 w-4" />
             </div>
+            <span className="text-xl font-bold tracking-tight">viajaYa</span>
+          </Link>
 
-            {/* Lottie Illustration */}
-            <div className="flex justify-center lg:justify-end">
-              <LottieIllustration
-                src="https://assets1.lottiefiles.com/packages/lf20_xlmz9xwm.json"
-                className="w-full max-w-md lg:max-w-lg"
-              />
-            </div>
+          {/* Center links */}
+          <nav className="hidden items-center gap-6 text-sm lg:flex">
+            <a href="#" className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
+              <Phone className="h-3.5 w-3.5" />
+              Para ventas 0 800 7 8484
+            </a>
+            <a href="#" className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
+              <Home className="h-3.5 w-3.5" />
+              Publica tu alojamiento
+            </a>
+            <a href="#" className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
+              <MapPin className="h-3.5 w-3.5" />
+              Mis viajes
+            </a>
+            <a href="#" className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
+              <HelpCircle className="h-3.5 w-3.5" />
+              Ayuda
+            </a>
+            <a href="#" className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors">
+              <Star className="h-3.5 w-3.5" />
+              Beneficios Pasaporte
+            </a>
+          </nav>
+
+          {/* Right icons */}
+          <div className="flex items-center gap-3">
+            <Link href="/login" className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+              <User className="h-4 w-4" />
+            </Link>
+            <button className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors">
+              <Menu className="h-4 w-4" />
+            </button>
+            <div className="hidden sm:block h-6 w-px bg-white/20" />
+            <button className="hidden sm:flex items-center gap-1.5 text-sm text-white/90 hover:text-white transition-colors">
+              <ShoppingCart className="h-4 w-4" />
+              Carrito
+            </button>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* Stats */}
-      <section className="border-b">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <AnimateOnScroll>
-            <div className="mb-10 text-center">
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-                En cifras
-              </h3>
-              <p className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">
-                Nuestra Universidad
-              </p>
-            </div>
-          </AnimateOnScroll>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {systemStats.map((stat, i) => (
-              <AnimateOnScroll key={stat.title} delay={i * 100}>
-                <Card className="group relative overflow-hidden border transition-[transform,box-shadow,border-color] duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-foreground/10">
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
-                  />
-                  <CardHeader className="relative flex flex-row items-center justify-between pb-2">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      {stat.title}
-                    </CardTitle>
-                    <div
-                      className={`rounded-lg bg-muted p-2 transition-colors duration-300 group-hover:bg-background ${stat.iconColor}`}
-                    >
-                      <stat.icon className="h-4 w-4" />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="relative">
-                    <div className="text-3xl font-extrabold tracking-tight">
-                      {stat.value}
-                    </div>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {stat.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </AnimateOnScroll>
+      {/* ============ NAV TABS ============ */}
+      <nav className="border-b bg-white shadow-sm">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex items-center gap-1 overflow-x-auto py-2 scrollbar-hide">
+            {navTabs.map((tab) => (
+              <button
+                key={tab.label}
+                onClick={() => setActiveTab(tab.label)}
+                className={`flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                  activeTab === tab.label
+                    ? "bg-[#4300D2]/10 text-[#4300D2] ring-1 ring-[#4300D2]/30"
+                    : "text-gray-600 hover:bg-gray-100"
+                }`}
+              >
+                <tab.icon className="h-4 w-4" />
+                {tab.label}
+              </button>
             ))}
           </div>
         </div>
+      </nav>
+
+      {/* ============ SEARCH SECTION ============ */}
+      <section className="bg-white pb-6 pt-4 shadow-sm">
+        <div className="mx-auto max-w-7xl px-4">
+          <h2 className="mb-4 text-lg font-bold text-gray-900">Paquetes turísticos</h2>
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+            {/* Origin / Destination */}
+            <div className="flex flex-1 items-center gap-0 rounded-xl border bg-white">
+              <div className="flex flex-1 items-center gap-3 px-4 py-3">
+                <div className="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#4300D2]">
+                  <div className="h-2 w-2 rounded-full bg-[#4300D2]" />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400">Origen</p>
+                  <p className="text-sm font-medium text-gray-700">Lima, Perú</p>
+                </div>
+              </div>
+              <button className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border bg-white text-[#4300D2] hover:bg-gray-50 transition-colors">
+                <ArrowLeftRight className="h-4 w-4" />
+              </button>
+              <div className="flex flex-1 items-center gap-3 px-4 py-3">
+                <MapPin className="h-4 w-4 text-gray-400" />
+                <div>
+                  <p className="text-xs text-gray-400">Destino</p>
+                  <p className="text-sm text-gray-400">¿A dónde viajas?</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Dates */}
+            <div className="flex flex-1 items-center gap-0 rounded-xl border bg-white lg:max-w-xs">
+              <div className="flex flex-1 items-center gap-3 border-r px-4 py-3">
+                <CalendarDays className="h-4 w-4 text-gray-400" />
+                <div>
+                  <p className="text-xs text-gray-400">Entrada</p>
+                  <p className="text-sm text-gray-400">Seleccionar</p>
+                </div>
+              </div>
+              <div className="flex flex-1 items-center gap-3 px-4 py-3">
+                <CalendarDays className="h-4 w-4 text-gray-400" />
+                <div>
+                  <p className="text-xs text-gray-400">Salida</p>
+                  <p className="text-sm text-gray-400">Seleccionar</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Passengers */}
+            <div className="flex items-center gap-3 rounded-xl border bg-white px-4 py-3 lg:max-w-[220px]">
+              <Users className="h-4 w-4 text-gray-400" />
+              <div>
+                <p className="text-xs text-gray-400">Pasajeros y habitaciones</p>
+                <p className="text-sm font-medium text-gray-700">2 personas, 1 habitación</p>
+              </div>
+            </div>
+
+            {/* Search button */}
+            <button className="flex items-center justify-center gap-2 rounded-xl bg-red-600 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:bg-red-700 hover:shadow-xl active:scale-[0.98]">
+              <Search className="h-5 w-5" />
+              Buscar
+            </button>
+          </div>
+        </div>
       </section>
 
-      {/* Features with illustration */}
-      <section className="relative border-b overflow-hidden">
-        {/* Animated background blobs — pure CSS */}
-        <div className="pointer-events-none absolute inset-0 overflow-hidden [contain:strict]">
-          <div className="blob-animate-2 absolute -top-1/4 -left-1/4 h-[350px] w-[350px] rounded-full bg-blue-500/4 blur-2xl" />
-          <div className="blob-animate-1 absolute -bottom-1/4 -right-1/4 h-[300px] w-[300px] rounded-full bg-violet-500/4 blur-2xl" />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div className="flex justify-center lg:justify-start">
-              <LottieIllustration
-                src="https://assets10.lottiefiles.com/packages/lf20_5tl1xxnz.json"
-                className="w-full max-w-sm lg:max-w-md"
+      {/* ============ HERO BANNER / CAROUSEL ============ */}
+      <section className="mx-auto w-full max-w-7xl px-4 py-8">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#4300D2] via-[#5B21B6] to-[#7C3AED] shadow-xl">
+          <div className="grid min-h-[320px] items-center lg:grid-cols-2">
+            {/* Image side */}
+            <div className="relative hidden h-full lg:block">
+              <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&h=400&fit=crop"
+                alt="Playa tropical"
+                className="h-full w-full object-cover"
+                style={{ clipPath: "ellipse(90% 100% at 30% 50%)" }}
               />
             </div>
 
+            {/* Text side */}
+            <div className="flex flex-col items-center justify-center px-8 py-12 text-center text-white lg:items-start lg:text-left">
+              <p className="text-xl font-semibold lg:text-2xl">Todos los productos</p>
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="text-lg">USD</span>
+                <span className="text-7xl font-extrabold leading-none lg:text-8xl">80</span>
+                <span className="text-lg font-semibold">DCTO.<br/>ADICIONAL</span>
+              </div>
+              <button className="mt-6 rounded-full border-2 border-white bg-transparent px-8 py-2.5 font-semibold text-white transition-colors hover:bg-white hover:text-[#4300D2]">
+                Ver ofertas
+              </button>
+            </div>
+          </div>
+
+          {/* Carousel arrows */}
+          <button className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30">
+            <ChevronLeft className="h-6 w-6" />
+          </button>
+          <button className="absolute right-3 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-colors hover:bg-white/30">
+            <ChevronRight className="h-6 w-6" />
+          </button>
+
+          {/* Dots */}
+          <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+            <div className="h-2.5 w-2.5 rounded-full bg-white" />
+            <div className="h-2.5 w-2.5 rounded-full bg-white/40" />
+            <div className="h-2.5 w-2.5 rounded-full bg-white/40" />
+          </div>
+        </div>
+      </section>
+
+      {/* ============ THREE FEATURE CARDS ============ */}
+      <section className="mx-auto w-full max-w-7xl px-4 pb-8">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#4300D2]/10 text-[#4300D2]">
+              <CreditCard className="h-6 w-6" />
+            </div>
             <div>
-              <AnimateOnScroll delay={100}>
-                <Badge
-                  variant="outline"
-                  className="mb-4 rounded-full px-3 py-1 text-xs font-medium"
-                >
-                  Plataforma Modular
-                </Badge>
-                <h3 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                  Gestión centralizada para toda la universidad
-                </h3>
-                <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-                  Administra módulos de manera independiente: usuarios,
-                  documentos, reportes, y más. Cada módulo se adapta a las
-                  necesidades específicas de cada área.
-                </p>
-              </AnimateOnScroll>
+              <p className="font-bold text-gray-900">Promos y medios de pago</p>
+              <p className="mt-0.5 text-sm text-gray-500">
+                Cuotas con tarjetas, promociones bancarias y mucho más
+              </p>
+            </div>
+          </div>
 
-              <AnimateOnScroll delay={200}>
-                <div className="mt-8 grid gap-3 sm:grid-cols-2">
-                  {[
-                    {
-                      icon: Shield,
-                      title: "Control de Acceso",
-                      desc: "Roles y permisos por módulo",
-                    },
-                    {
-                      icon: Users,
-                      title: "Multi-usuario",
-                      desc: "Gestión de personal y estudiantes",
-                    },
-                    {
-                      icon: BarChart,
-                      title: "Reportes",
-                      desc: "Estadísticas en tiempo real",
-                    },
-                    {
-                      icon: Blocks,
-                      title: "Modular",
-                      desc: "Activa solo lo que necesitas",
-                    },
-                  ].map((feature) => (
-                    <div
-                      key={feature.title}
-                      className="flex items-start gap-3 rounded-xl p-3"
-                    >
-                      <div className="mt-0.5 rounded-lg bg-primary/10 p-2 text-primary">
-                        <feature.icon className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold">{feature.title}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {feature.desc}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </AnimateOnScroll>
+          <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#4300D2]/10 text-[#4300D2]">
+              <Gift className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="font-bold text-gray-900">Beneficios y cupones</p>
+              <p className="mt-0.5 text-sm text-gray-500">
+                Acumula puntos Pasaporte y aprovecha todos los cupones
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 rounded-xl border bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#4300D2]/10 text-[#4300D2]">
+              <Headphones className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="font-bold text-gray-900">Mi agente de viajes</p>
+              <p className="mt-0.5 text-sm text-gray-500">
+                Compra llamando al <strong>0 800 8 0516</strong> o en nuestros canales
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Info + Quick Links */}
-      <section className="flex-1">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="grid gap-6 lg:grid-cols-3">
-            {/* Información institucional */}
-            <AnimateOnScroll className="lg:col-span-2">
-              <Card className="h-full transition-[box-shadow] duration-300 hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-xl">
-                    <Building2 className="h-5 w-5 text-primary" />
-                    Información Institucional
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {[
-                      {
-                        icon: MapPin,
-                        label: "Dirección",
-                        value:
-                          "Av. Jorge Chávez 1160, Puerto Maldonado, Madre de Dios",
-                      },
-                      {
-                        icon: Phone,
-                        label: "Teléfono",
-                        value: "(082) 571-046",
-                      },
-                      {
-                        icon: Mail,
-                        label: "Correo",
-                        value: "informes@unamad.edu.pe",
-                      },
-                      {
-                        icon: Clock,
-                        label: "Horario de Atención",
-                        value: "Lunes a Viernes, 8:00 AM - 4:00 PM",
-                      },
-                    ].map((item) => (
-                      <div
-                        key={item.label}
-                        className="group flex items-start gap-3 rounded-xl p-3 transition-colors duration-200 hover:bg-muted/50"
-                      >
-                        <div className="mt-0.5 rounded-lg bg-muted p-2 transition-colors duration-200 group-hover:bg-primary/10 group-hover:text-primary">
-                          <item.icon className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-semibold">{item.label}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {item.value}
-                          </p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimateOnScroll>
-
-            {/* Enlaces rápidos */}
-            <AnimateOnScroll delay={150}>
-              <Card className="h-full transition-[box-shadow] duration-300 hover:shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-xl">
-                    <Globe className="h-5 w-5 text-primary" />
-                    Enlaces Rápidos
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {quickLinks.map((link) => (
-                    <a
-                      key={link.title}
-                      href={link.href}
-                      className="group flex items-center gap-3 rounded-xl p-3 transition-[background-color] duration-200 hover:bg-muted/50"
-                    >
-                      <div className="rounded-lg bg-muted p-2 transition-colors duration-200 group-hover:bg-primary/10 group-hover:text-primary">
-                        <link.icon className="h-4 w-4" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="text-sm font-semibold">{link.title}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {link.desc}
-                        </p>
-                      </div>
-                      <ExternalLink className="h-3.5 w-3.5 text-muted-foreground opacity-0 transition-[opacity,transform] duration-200 group-hover:opacity-100 group-hover:translate-x-0.5" />
-                    </a>
-                  ))}
-
-                  <div className="pt-4">
-                    <Link href="/login" className="block">
-                      <Button
-                        variant="outline"
-                        className="group w-full rounded-xl font-semibold transition-[transform,background-color,color] duration-200 hover:bg-primary hover:text-primary-foreground hover:scale-[1.02] active:scale-[0.98]"
-                      >
-                        <Shield className="mr-2 h-4 w-4" />
-                        Acceso Administrativo
-                        <ArrowRight className="ml-auto h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            </AnimateOnScroll>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="border-b">
-        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-          <div className="relative overflow-hidden rounded-2xl bg-primary px-6 py-12 sm:px-12 sm:py-16">
-            <div className="pointer-events-none absolute inset-0 [contain:strict]">
-              <div className="blob-animate-1 absolute -top-1/4 right-0 h-[250px] w-[250px] rounded-full bg-white/5 blur-2xl" />
-              <div className="blob-animate-2 absolute -bottom-1/4 left-0 h-[200px] w-[200px] rounded-full bg-white/5 blur-2xl" />
-            </div>
-
-            <div className="relative grid items-center gap-8 lg:grid-cols-2">
-              <AnimateOnScroll>
-                <div>
-                  <h3 className="text-2xl font-bold tracking-tight text-primary-foreground sm:text-3xl">
-                    Comienza a gestionar hoy
-                  </h3>
-                  <p className="mt-4 max-w-md text-base leading-relaxed text-primary-foreground/70">
-                    Accede al sistema y optimiza los procesos administrativos y
-                    académicos de tu facultad.
-                  </p>
-                  <div className="mt-8">
-                    <Link href="/login">
-                      <Button
-                        size="lg"
-                        variant="secondary"
-                        className="group rounded-xl px-8 font-semibold shadow-lg transition-[transform,box-shadow] duration-200 hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
-                      >
-                        Iniciar Sesión
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </AnimateOnScroll>
-
-              <div className="flex justify-center lg:justify-end">
-                <LottieIllustration
-                  src="https://assets3.lottiefiles.com/packages/lf20_tno6cg2w.json"
-                  className="w-full max-w-xs sm:max-w-sm"
+      {/* ============ POPULAR DESTINATIONS ============ */}
+      <section className="mx-auto w-full max-w-7xl px-4 pb-12">
+        <h2 className="mb-6 text-2xl font-bold text-gray-900">
+          Paquetes turísticos a destinos populares con descuentos
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {destinations.map((dest) => (
+            <Link
+              key={dest.name}
+              href={`/paquete/${dest.slug}`}
+              className="group overflow-hidden rounded-xl border bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-1"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={dest.image}
+                  alt={dest.name}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <div className="absolute bottom-3 left-3 text-white">
+                  <p className="text-lg font-bold">{dest.name}</p>
+                  <p className="text-sm text-white/80">{dest.country}</p>
+                </div>
               </div>
+              <div className="px-4 py-3">
+                <p className="text-xs text-gray-500">Paquetes desde</p>
+                <p className="text-lg font-bold text-[#4300D2]">{dest.price}</p>
+                <p className="text-xs text-gray-400">por persona</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ============ SECOND PROMO BANNER ============ */}
+      <section className="mx-auto w-full max-w-7xl px-4 pb-12">
+        <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-[#1E0A3C] to-[#4300D2] p-8 lg:p-12">
+          <div className="grid items-center gap-8 lg:grid-cols-2">
+            <div className="text-white">
+              <p className="text-sm font-semibold uppercase tracking-widest text-purple-300">
+                Ofertas exclusivas
+              </p>
+              <h3 className="mt-2 text-3xl font-extrabold lg:text-4xl">
+                Escapadas de fin de semana
+              </h3>
+              <p className="mt-3 max-w-md text-base text-purple-200">
+                Descubre paquetes con descuentos especiales para los mejores
+                destinos. Reserva ahora y ahorra hasta un 40%.
+              </p>
+              <button className="mt-6 rounded-full bg-red-600 px-8 py-3 font-semibold text-white shadow-lg transition-all hover:bg-red-700 hover:shadow-xl active:scale-[0.98]">
+                Ver todas las ofertas
+              </button>
+            </div>
+            <div className="hidden justify-center lg:flex">
+              <img
+                src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=500&h=300&fit=crop"
+                alt="Viaje"
+                className="rounded-xl shadow-2xl"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t bg-muted/30">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Building2 className="h-3.5 w-3.5" />
+      {/* ============ FOOTER ============ */}
+      <footer className="border-t bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-10">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div>
+              <div className="mb-4 flex items-center gap-2">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#4300D2] text-white">
+                  <Plane className="h-4 w-4" />
+                </div>
+                <span className="text-lg font-bold text-[#4300D2]">viajaYa</span>
               </div>
-              <span className="text-sm font-semibold">UNAMAD</span>
-            </div>
-            <div className="text-center text-sm text-muted-foreground sm:text-right">
-              <p>
-                &copy; 2026 Universidad Nacional Amazónica de Madre de Dios.
-                Todos los derechos reservados.
-              </p>
-              <p className="mt-1 text-xs">
-                Animaciones por{" "}
-                <a
-                  href="https://lottiefiles.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-muted-foreground/30 underline-offset-2 transition-colors hover:text-foreground"
-                >
-                  LottieFiles
-                </a>
+              <p className="text-sm text-gray-500">
+                Tu plataforma de confianza para planificar y reservar los mejores viajes.
               </p>
             </div>
+            <div>
+              <h4 className="mb-3 font-semibold text-gray-900">Productos</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Vuelos</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Hoteles</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Paquetes</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Actividades</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-3 font-semibold text-gray-900">Soporte</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Centro de ayuda</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Contacto</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Términos y condiciones</a></li>
+                <li><a href="#" className="hover:text-[#4300D2] transition-colors">Política de privacidad</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="mb-3 font-semibold text-gray-900">Contáctanos</h4>
+              <ul className="space-y-2 text-sm text-gray-500">
+                <li className="flex items-center gap-2">
+                  <Phone className="h-4 w-4" />
+                  0 800 8 0516
+                </li>
+                <li className="flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  Lima, Perú
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 border-t pt-6 text-center text-sm text-gray-400">
+            &copy; 2026 viajaYa. Todos los derechos reservados.
           </div>
         </div>
       </footer>
     </div>
-  );
+  )
 }

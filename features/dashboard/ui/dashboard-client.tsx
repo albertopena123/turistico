@@ -58,7 +58,7 @@ interface DashboardData {
     userId: string
     roleId: string
     roleSlug: string
-    documentNumber: string
+    email: string
     firstName: string
     paternalSurname: string
     maternalSurname: string

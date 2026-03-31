@@ -57,7 +57,7 @@ interface UserSession {
   paternalSurname: string
   maternalSurname: string
   roleSlug: string
-  documentNumber: string
+  email: string
 }
 
 interface AppSidebarProps {
@@ -79,7 +79,7 @@ export function AppSidebar({ session, modules, avatarUrl }: AppSidebarProps) {
     : "Administrador"
 
   const displayDoc = session
-    ? `Doc: ${session.documentNumber}`
+    ? session.email
     : "admin@unamad.edu.pe"
 
   function isActive(slug: string) {

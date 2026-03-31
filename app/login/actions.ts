@@ -9,15 +9,15 @@ export async function loginAction(
   _prevState: { error: string } | null,
   formData: FormData
 ) {
-  const documentNumber = formData.get("documentNumber") as string
+  const email = formData.get("email") as string
   const password = formData.get("password") as string
 
-  if (!documentNumber || !password) {
+  if (!email || !password) {
     return { error: "Todos los campos son obligatorios" }
   }
 
   const user = await db.user.findUnique({
-    where: { documentNumber },
+    where: { email },
     include: {
       role: {
         select: { id: true, slug: true },
@@ -43,7 +43,7 @@ export async function loginAction(
     userId: user.id,
     roleId: user.role.id,
     roleSlug: user.role.slug,
-    documentNumber: user.documentNumber,
+    email: user.email,
     firstName: user.firstName,
     paternalSurname: user.paternalSurname,
     maternalSurname: user.maternalSurname,
